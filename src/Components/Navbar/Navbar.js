@@ -31,6 +31,7 @@ function NavbarCom() {
                   onClick={ctx.openCart}
                 >
                   Cart
+                  {ctx.CartList.length > 0 ? ` - ${ctx.CartList.length}` : ""}
                 </Button>
               </div>
             </Nav.Link>
