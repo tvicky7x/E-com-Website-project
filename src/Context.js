@@ -27,9 +27,9 @@ export function ContextProvider(props) {
       price: "178",
     },
     {
-      item: "Everyday Normal Guy2",
-      id: "Everyday Normal Guy2",
-      url: "https://c.saavncdn.com/814/You-Want-Some-of-This-English-2009-500x500.jpg",
+      item: "Rise",
+      id: "Rise",
+      url: "https://c.saavncdn.com/750/Rise-English-2018-20180523230337-500x500.jpg",
       price: "128",
     },
     {

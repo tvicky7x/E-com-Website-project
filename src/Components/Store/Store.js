@@ -9,13 +9,13 @@ function Store() {
     <>
       <Container className="text-center py-4">
         <h2 className="mb-4">Music Albums</h2>
-        <div className="d-flex flex-wrap gap-3 justify-content-around">
+        <div className="d-flex flex-wrap gap-3 justify-content-evenly">
           {ctx.List.map((item) => {
             return <ItemCard data={item} key={item.id} />;
           })}
         </div>
         <h2 className="mb-4 mt-5">Merchandise</h2>
-        <div className="d-flex flex-wrap gap-3 justify-content-around">
+        <div className="d-flex flex-wrap gap-3 justify-content-evenly">
           {ctx.Merchandise.map((item) => {
             return <ItemCard data={item} key={item.id} />;
           })}
