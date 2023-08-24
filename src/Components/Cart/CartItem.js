@@ -10,7 +10,7 @@ function CartItem(props) {
         <img
           src={props.data.url}
           alt=""
-          className="object-fit-cover"
+          className="object-fit-cover rounded"
           style={{ width: "100px", height: "100px" }}
         />
         <div>
@@ -23,19 +23,23 @@ function CartItem(props) {
           <p className="m-0">
             Quantity{" "}
             <span className="fw-semibold">
-              <i
-                class="bi bi-plus-lg"
-                onClick={() => {
-                  ctx.changeCart(props.data.id, 1);
-                }}
-              ></i>{" "}
+              <Button variant="none" size="sm" className="p-0">
+                <i
+                  class="bi bi-plus-lg"
+                  onClick={() => {
+                    ctx.changeCart(props.data.id, 1);
+                  }}
+                ></i>
+              </Button>{" "}
               {props.data.quantity}{" "}
-              <i
-                class="bi bi-dash-lg"
-                onClick={() => {
-                  ctx.changeCart(props.data.id, -1);
-                }}
-              ></i>
+              <Button variant="none" size="sm" className="p-0">
+                <i
+                  class="bi bi-dash-lg"
+                  onClick={() => {
+                    ctx.changeCart(props.data.id, -1);
+                  }}
+                ></i>
+              </Button>
             </span>
           </p>
           <Button

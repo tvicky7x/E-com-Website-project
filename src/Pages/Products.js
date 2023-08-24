@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import Store from "./Components/Store/Store";
+import Store from "../Components/Store/Store";
 import { Button } from "react-bootstrap";
-import Context from "./Context";
+import Context from "../Context";
 
 function Products() {
   const ctx = useContext(Context);

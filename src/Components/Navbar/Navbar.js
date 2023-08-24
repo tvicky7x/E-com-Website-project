@@ -4,6 +4,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Context from "../../Context";
+import { NavLink } from "react-router-dom";
 
 function NavbarCom() {
   const ctx = useContext(Context);
@@ -16,9 +17,21 @@ function NavbarCom() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto text-center">
-            <Nav.Link href="#Home">Home</Nav.Link>
-            <Nav.Link href="#Store">Store</Nav.Link>
-            <Nav.Link href="#About">About</Nav.Link>
+            <Nav.Link>
+              <NavLink to={"/"} className="nav-link d-inline">
+                Home
+              </NavLink>
+            </Nav.Link>
+            <Nav.Link>
+              <NavLink to={"/products"} className="nav-link d-inline">
+                Store
+              </NavLink>
+            </Nav.Link>
+            <Nav.Link>
+              <NavLink to={"/about"} className="nav-link d-inline">
+                About
+              </NavLink>
+            </Nav.Link>
             <Nav.Link
               href="#Cart"
               className="p-0 align-self-center w-100 ms-md-2"

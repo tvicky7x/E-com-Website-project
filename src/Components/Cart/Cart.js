@@ -11,12 +11,13 @@ function Cart() {
   return (
     <>
       <div
-        className="position-fixed fixed-top bg-dark vw-100 vh-100 opacity-25"
+        className="position-fixed fixed-top bg-dark vw-100 vh-100 opacity-50"
         style={{ top: "0", left: "0" }}
         onClick={ctx.closeCart}
       ></div>
+
       <div
-        className="position-fixed fixed-top"
+        className=" position-absolute fixed-top"
         style={{
           minWidth: "300px",
           maxWidth: "500px",
