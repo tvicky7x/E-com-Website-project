@@ -1,13 +1,14 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
 
 function Home() {
   const navigate = useNavigate();
 
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [data, setData] = useState(null);
 
   function storeBtn() {
     navigate("/products");
@@ -16,16 +17,21 @@ function Home() {
     navigate("/about");
   }
 
-  async function backData() {
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await axios.get("https://reqres.in/api/unknown");
-    } catch (error) {
-      setError(error.message);
-    }
-    setLoading(false);
-  }
+  useEffect(() => {
+    (async () => {
+      setLoading(true);
+      setError(null);
+      setData(null);
+      try {
+        const response = await axios.get("https://reqres.in/api/unknown");
+        setData(response.data.data);
+      } catch (error) {
+        setError(error);
+      }
+      setLoading(false);
+    })();
+  }, []);
+
   return (
     <>
       <Container className="pt-3 pb-5">
@@ -60,11 +66,18 @@ function Home() {
         </Row>
       </Container>
       <div className="text-center p-2">
-        <Button variant="dark" size="sm" onClick={backData}>
+        <Button variant="dark" size="sm">
           API Call Button
         </Button>
         {isLoading && <p>Loading...</p>}
         {!isLoading && error && <p>{error}</p>}
+        {!isLoading && !error && data && (
+          <div className=" d-flex gap-2 justify-content-center">
+            {data.map((item) => {
+              return <p style={{ color: `${item.color}` }}>{item.name}</p>;
+            })}
+          </div>
+        )}
       </div>
     </>
   );
