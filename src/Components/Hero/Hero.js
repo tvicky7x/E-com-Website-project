@@ -1,7 +1,13 @@
 import React from "react";
 import { Container } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
+import HeroVideo from "./HeroVideo";
 
-function Hero() {
+function Hero(props) {
+  const location = useLocation();
+  if (location.pathname === "/") {
+    return <HeroVideo />;
+  }
   return (
     <div className="bg-dark-subtle py-3 text-center">
       <Container>

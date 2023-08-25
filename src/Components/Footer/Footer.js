@@ -16,17 +16,17 @@ function Footer() {
               <ul style={{ listStyleType: "none" }}>
                 <li>
                   <a href="#Home" className="text-decoration-none text-light">
-                    <i class="bi bi-youtube"></i> YouTube
+                    <i className="bi bi-youtube"></i> YouTube
                   </a>
                 </li>
                 <li>
                   <a href="#Home" className="text-decoration-none text-light">
-                    <i class="bi bi-facebook"></i> FaceBook
+                    <i className="bi bi-facebook"></i> FaceBook
                   </a>
                 </li>
                 <li>
                   <a href="#Home" className="text-decoration-none text-light">
-                    <i class="bi bi-instagram"></i> Instagram
+                    <i className="bi bi-instagram"></i> Instagram
                   </a>
                 </li>
               </ul>

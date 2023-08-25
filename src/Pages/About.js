@@ -5,7 +5,7 @@ function About() {
   return (
     <>
       <Container className="pt-3 pb-5">
-        <h2 className="text-dark text-center mb-3">About US</h2>
+        <h2 className="text-dark text-center mb-3">About Us</h2>
         <Row className="gap-4">
           <Col>
             <img

@@ -2,12 +2,13 @@ import React, { useContext } from "react";
 import NavbarCom from "../Components/Navbar/Navbar";
 import Hero from "../Components/Hero/Hero";
 import Cart from "../Components/Cart/Cart";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Footer from "../Components/Footer/Footer";
 import Context from "../Context";
 
 function Root() {
   const ctx = useContext(Context);
+
   return (
     <>
       {ctx.Cart && <Cart />}
