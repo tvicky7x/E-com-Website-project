@@ -1,10 +1,12 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
   const navigate = useNavigate();
+
+  const [isLoading, setLoading] = useState(false);
 
   function storeBtn() {
     navigate("/products");
@@ -15,8 +17,10 @@ function Home() {
 
   async function backData() {
     try {
+      setLoading(true);
       const response = await axios.get("https://reqres.in/api/unknown");
       console.log(response);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -58,6 +62,7 @@ function Home() {
         <Button variant="dark" size="sm" onClick={backData}>
           API Call Button
         </Button>
+        {isLoading && <p>Loading...</p>}
       </div>
     </>
   );
