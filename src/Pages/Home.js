@@ -7,6 +7,7 @@ function Home() {
   const navigate = useNavigate();
 
   const [isLoading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   function storeBtn() {
     navigate("/products");
@@ -16,14 +17,14 @@ function Home() {
   }
 
   async function backData() {
+    setLoading(true);
+    setError(null);
     try {
-      setLoading(true);
       const response = await axios.get("https://reqres.in/api/unknown");
-      console.log(response);
-      setLoading(false);
     } catch (error) {
-      console.log(error);
+      setError(error.message);
     }
+    setLoading(false);
   }
   return (
     <>
@@ -63,6 +64,7 @@ function Home() {
           API Call Button
         </Button>
         {isLoading && <p>Loading...</p>}
+        {!isLoading && error && <p>{error}</p>}
       </div>
     </>
   );
