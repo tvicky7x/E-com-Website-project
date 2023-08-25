@@ -57,6 +57,16 @@ function Home() {
       console.log(error);
     }
   }
+  async function deleteData(id) {
+    try {
+      await axios.delete(
+        `https://first-test-f63cf-default-rtdb.asia-southeast1.firebasedatabase.app/user/${id}.json`
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <>
       <Container className="pt-3 pb-5">
@@ -113,11 +123,20 @@ function Home() {
           {data.map((item) => {
             return (
               <p
-                className="p-2 rounded text-white fw-bold"
+                className="p-2 rounded text-white"
                 style={{ backgroundColor: `${item.color}` }}
                 key={item.id}
               >
                 {item.name}
+                <Button
+                  variant="none"
+                  size="sm"
+                  onClick={() => {
+                    deleteData(item.id);
+                  }}
+                >
+                  X
+                </Button>
               </p>
             );
           })}
