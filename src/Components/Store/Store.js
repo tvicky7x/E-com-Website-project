@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
-import { Container } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import ItemCard from "./ItemCard";
 import Context from "../../Context";
-import Auth from "../Auth/Auth";
 
 function Store() {
   const ctx = useContext(Context);
@@ -22,7 +21,11 @@ function Store() {
           })}
         </div>
       </Container>
-      <Auth />
+      <div className="bg-dark-subtle py-3 text-center">
+        <Button variant="dark" size="lg" onClick={ctx.openCart}>
+          View Cart
+        </Button>
+      </div>
     </>
   );
 }

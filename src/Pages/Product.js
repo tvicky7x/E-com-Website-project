@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useCallback, useContext, useEffect } from "react";
 import Context from "../Context";
 import { useNavigate, useParams } from "react-router-dom";
 import ProductDetails from "../Components/Product/ProductDetails";
@@ -6,6 +6,7 @@ import { Button, Container } from "react-bootstrap";
 
 function Product() {
   const ctx = useContext(Context);
+  const navigate = useNavigate();
   const params = useParams();
   const ListItem = ctx.List.filter((item) => {
     return item.id === params.productId;
@@ -14,10 +15,15 @@ function Product() {
     return item.id === params.productId;
   });
 
-  const navigate = useNavigate();
   function storeHandler() {
     navigate("/products");
   }
+
+  useEffect(() => {
+    if (!ctx.isLogIn) {
+      navigate("/logIn");
+    }
+  }, [ctx.isLogIn, navigate]);
 
   return (
     <>

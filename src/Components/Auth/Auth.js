@@ -8,6 +8,8 @@ import {
   FormLabel,
 } from "react-bootstrap";
 import Context from "../../Context";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Auth() {
   const ctx = useContext(Context);
@@ -18,26 +20,48 @@ function Auth() {
   function loginHandler() {
     setLogging(!isLogging);
   }
+  const navigate = useNavigate();
 
   const inputEmailRef = useRef();
   const inputPasswordRef = useRef();
 
-  function formSubmitHandler(e) {
+  async function formSubmitHandler(e) {
     e.preventDefault();
     const email = inputEmailRef.current.value;
     const password = inputPasswordRef.current.value;
-    if (isLogging) {
-      ctx.logIn({ email: email, password: password });
+    if (!isLogging) {
+      try {
+        await axios.post(
+          "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDLKmMRL800SGHidB6TAoC9jXvKuu24adw",
+          { email: email, password: password, returnSecureToken: true }
+        );
+        setLogging(!isLogging);
+        e.target.reset();
+      } catch (error) {
+        alert("SignUp Failed");
+      }
     } else {
-      ctx.signUp({ email: email, password: password });
+      try {
+        const response = await axios.post(
+          "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDLKmMRL800SGHidB6TAoC9jXvKuu24adw",
+          { email: email, password: password, returnSecureToken: true }
+        );
+        ctx.logIn(response.data.idToken);
+        e.target.reset();
+        navigate("/");
+      } catch (error) {
+        alert("Authentication Failed");
+      }
     }
-    e.target.reset();
   }
+
   return (
     <>
       <Container className="py-3 text-center" style={{ maxWidth: "400px" }}>
         <Form className="mx-auto" onSubmit={formSubmitHandler}>
           <FormGroup className=" text-bg-dark p-3 rounded">
+            {isLogging && <h4 className="mt-1 mb-4">Log In</h4>}
+            {!isLogging && <h4 className="mt-1 mb-4">Sign Up</h4>}
             <div>
               <FormLabel>Email</FormLabel>
               <FormControl type="text" required ref={inputEmailRef} />
@@ -51,7 +75,7 @@ function Auth() {
                 ref={inputPasswordRef}
               />
             </div>
-            <div className="mt-4">
+            <div className="mt-3">
               {isLogging && (
                 <Button variant="light" type="submit" className=" fw-medium">
                   Log In

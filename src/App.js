@@ -7,6 +7,7 @@ import Root from "./Pages/Root";
 import Error from "./Pages/Error";
 import Contact from "./Pages/Contact";
 import Product from "./Pages/Product";
+import Auth from "./Components/Auth/Auth";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
       { path: "/products/:productId", element: <Product /> },
       { path: "/contact", element: <Contact /> },
       { path: "/about", element: <About /> },
+      { path: "/logIn", element: <Auth /> },
     ],
   },
 ]);

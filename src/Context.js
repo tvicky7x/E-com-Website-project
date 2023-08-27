@@ -12,9 +12,10 @@ const Context = React.createContext({
   removeCart: () => {},
   changeCart: () => {},
   isLogIn: false,
-  signUp: () => {},
+
   logIn: () => {},
   logOut: () => {},
+  token: null,
 });
 
 export function ContextProvider(props) {
@@ -101,22 +102,13 @@ export function ContextProvider(props) {
   const [CartList, setCartList] = useState([]);
   const [Cart, setCart] = useState(false);
   const [isLogIn, setLogIn] = useState(false);
+  const [token, setToken] = useState(null);
 
   // Logging Functions
-  async function signUp(data) {
-    data.returnSecureToken = true;
-    try {
-      const response = await axios.post(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDLKmMRL800SGHidB6TAoC9jXvKuu24adw",
-        data
-      );
-      console.log(response);
-    } catch (error) {
-      alert(error);
-    }
-  }
-  async function logIn(data) {
-    console.log(data);
+
+  async function logIn(id) {
+    setToken(id);
+    setLogIn(true);
   }
   async function logOut(data) {
     console.log(data);
@@ -178,9 +170,10 @@ export function ContextProvider(props) {
         removeCart: removeCart,
         changeCart: changeCart,
         isLogIn: isLogIn,
-        signUp: signUp,
+
         logIn: logIn,
         logOut: logOut,
+        token: token,
       }}
     >
       {props.children}

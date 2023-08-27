@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import {
   Button,
   Container,
@@ -8,11 +8,21 @@ import {
   FormGroup,
   FormLabel,
 } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import Context from "../Context";
 
 function Contact() {
   const nameRef = useRef();
   const emailRef = useRef();
   const phoneRef = useRef();
+  const ctx = useContext(Context);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!ctx.isLogIn) {
+      navigate("/logIn");
+    }
+  }, [ctx.isLogIn, navigate]);
 
   async function submitHandler(e) {
     e.preventDefault();
