@@ -1,4 +1,4 @@
-import React, {useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import Context from "../Context";
 import { useNavigate, useParams } from "react-router-dom";
 import ProductDetails from "../Components/Product/ProductDetails";
@@ -18,12 +18,6 @@ function Product() {
   function storeHandler() {
     navigate("/products");
   }
-
-  useEffect(() => {
-    if (!ctx.isLogIn) {
-      navigate("/logIn");
-    }
-  }, [ctx.isLogIn, navigate]);
 
   return (
     <>

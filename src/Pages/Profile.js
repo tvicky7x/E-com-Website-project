@@ -20,23 +20,24 @@ function Profile() {
     e.preventDefault();
     const password = changePasswordRef.current.value;
     try {
-      const response = await axios.post(
+      await axios.post(
         "https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyDLKmMRL800SGHidB6TAoC9jXvKuu24adw",
         {
           idToken: ctx.token,
           password: password,
-          returnSecureToken: true,
+          returnSecureToken: false,
         }
       );
-      ctx.changeToken(response.data.idToken);
+      navigate("/");
+      ctx.logOut();
     } catch (error) {
       alert(error);
     }
   }
 
-  async function logout() {
+  function logout() {
+    navigate("/");
     ctx.logOut();
-    navigate("/logIn");
   }
   return (
     <>
@@ -50,7 +51,12 @@ function Profile() {
           <FormGroup>
             <div>
               <FormLabel>Change Password</FormLabel>
-              <FormControl type="password" ref={changePasswordRef} />
+              <FormControl
+                type="password"
+                ref={changePasswordRef}
+                required
+                minLength={6}
+              />
             </div>
             <Button variant="dark mt-2" type="submit" size="sm">
               Change Password

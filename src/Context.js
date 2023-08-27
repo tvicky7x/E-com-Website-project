@@ -11,7 +11,6 @@ const Context = React.createContext({
   removeCart: () => {},
   changeCart: () => {},
   isLogIn: false,
-  changeToken: () => {},
   logIn: () => {},
   logOut: () => {},
   token: null,
@@ -104,10 +103,7 @@ export function ContextProvider(props) {
   const [token, setToken] = useState(null);
 
   // Logging Functions
-  function changeToken(id) {
-    setToken(id);
-    setLogIn(false);
-  }
+
   function logIn(id) {
     setToken(id);
     setLogIn(true);
@@ -173,7 +169,7 @@ export function ContextProvider(props) {
         removeCart: removeCart,
         changeCart: changeCart,
         isLogIn: isLogIn,
-        changeToken: changeToken,
+
         logIn: logIn,
         logOut: logOut,
         token: token,

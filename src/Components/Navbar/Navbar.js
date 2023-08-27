@@ -42,6 +42,13 @@ function NavbarCom({ display }) {
             </NavLink>
             {ctx.isLogIn && display && (
               <>
+                <NavLink to={"/profile"} className="nav-link d-inline">
+                  Profile
+                </NavLink>
+              </>
+            )}
+            {ctx.isLogIn && display && (
+              <>
                 <Nav.Link className="p-0 align-self-center w-100 ms-md-2">
                   <div className="d-grid">
                     <Button
@@ -57,15 +64,10 @@ function NavbarCom({ display }) {
                     </Button>
                   </div>
                 </Nav.Link>
-                <Nav.Link>
-                  <Button variant="light" size="sm" onClick={profilePage}>
-                    <i className="bi bi-person-circle"></i>
-                  </Button>
-                </Nav.Link>
               </>
             )}
 
-            {!ctx.isLogIn && display && (
+            {!ctx.isLogIn && (
               <Nav.Link className="p-0 align-self-center w-100 ms-md-2">
                 <div className="d-grid">
                   <Button

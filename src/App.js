@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Products from "./Pages/Products";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./Pages/Home";
@@ -9,6 +9,7 @@ import Contact from "./Pages/Contact";
 import Product from "./Pages/Product";
 import Auth from "./Components/Auth/Auth";
 import Profile from "./Pages/Profile";
+import Context from "./Context";
 
 const router = createBrowserRouter([
   {
@@ -22,15 +23,27 @@ const router = createBrowserRouter([
       { path: "/contact", element: <Contact /> },
       { path: "/about", element: <About /> },
       { path: "/profile", element: <Profile /> },
+    ],
+  },
+]);
+const routerLogOut = createBrowserRouter([
+  {
+    path: "/",
+    element: <Root />,
+    errorElement: <Error />,
+    children: [
+      { index: true, element: <Home /> },
+      { path: "/about", element: <About /> },
       { path: "/logIn", element: <Auth /> },
     ],
   },
 ]);
-
 function App() {
+  const ctx = useContext(Context);
   return (
     <>
-      <RouterProvider router={router} />
+      {ctx.isLogIn && <RouterProvider router={router} />}
+      {!ctx.isLogIn && <RouterProvider router={routerLogOut} />}
     </>
   );
 }
