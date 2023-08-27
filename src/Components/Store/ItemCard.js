@@ -9,7 +9,7 @@ function ItemCard(props) {
   const ctx = useContext(Context);
 
   function viewHandler(id) {
-    navigate(`/product/${id}`);
+    navigate(`/products/${id}`);
   }
 
   return (

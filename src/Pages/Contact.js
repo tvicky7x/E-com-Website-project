@@ -33,9 +33,10 @@ function Contact() {
 
   return (
     <>
-      <Container style={{ maxWidth: "500px" }}>
+      <Container className="py-3" style={{ maxWidth: "500px" }}>
+        <h2 className="text-center mt-2">Contact Us</h2>
         <Form onSubmit={submitHandler}>
-          <FormGroup className="p-3 bg-dark text-light my-3 rounded">
+          <FormGroup className="p-3 bg-body-secondary my-3 rounded">
             <div>
               <FormLabel>Name</FormLabel>
               <FormControl type="text" ref={nameRef} required />
@@ -50,7 +51,7 @@ function Contact() {
             </div>
             <div className=" text-center mt-3">
               <Button
-                variant="light"
+                variant="dark"
                 size="sm"
                 type="submit"
                 className="fw-semibold px-3"

@@ -6,7 +6,7 @@ import HeroVideo from "./HeroVideo";
 function Hero(props) {
   const location = useLocation();
 
-  if (location.pathname.includes("/product/")) {
+  if (location.pathname.includes("/products/")) {
     return null;
   }
 

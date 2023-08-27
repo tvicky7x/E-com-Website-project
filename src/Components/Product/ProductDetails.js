@@ -2,10 +2,14 @@ import React, { useContext } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import Review from "./Review";
 import Context from "../../Context";
+import { useNavigate } from "react-router-dom";
 
 function ProductDetails({ data }) {
   const ctx = useContext(Context);
-
+  const navigation = useNavigate();
+  function storeHandler() {
+    navigation("/products");
+  }
   return (
     <>
       <Container>
@@ -15,7 +19,7 @@ function ProductDetails({ data }) {
               src={data.url}
               alt=""
               className="object-fit-cover rounded sticky-top"
-              style={{ width: "400px", height: "400px" }}
+              style={{ maxWidth: "400px", maxHeight: "400px" }}
             />
           </Col>
           <Col md={true}>
@@ -41,6 +45,9 @@ function ProductDetails({ data }) {
             </div>
             <h4 className="mt-3 text-dark-emphasis">Description</h4>
             <p>{data.description}</p>
+            <Button variant="dark" size="sm" onClick={storeHandler}>
+              Back to Store
+            </Button>
           </Col>
         </Row>
       </Container>

@@ -8,12 +8,13 @@ import Context from "../Context";
 
 function Root() {
   const ctx = useContext(Context);
+  const display = true;
 
   return (
     <>
       {ctx.Cart && <Cart />}
       <div className={`${ctx.Cart ? "vh-100 overflow-y-hidden" : ""}`}>
-        <NavbarCom />
+        <NavbarCom display={display} />
         <Hero />
         <Outlet />
         <Footer />

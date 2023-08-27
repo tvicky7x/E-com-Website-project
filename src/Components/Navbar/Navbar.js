@@ -6,7 +6,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Context from "../../Context";
 import { NavLink } from "react-router-dom";
 
-function NavbarCom() {
+function NavbarCom({ display }) {
   const ctx = useContext(Context);
   return (
     <Navbar expand="md" className="bg-body-dark" bg="dark" data-bs-theme="dark">
@@ -29,22 +29,21 @@ function NavbarCom() {
             <NavLink to={"/about"} className="nav-link d-inline">
               About
             </NavLink>
-            <Nav.Link
-              href="#Cart"
-              className="p-0 align-self-center w-100 ms-md-2"
-            >
-              <div className="d-grid">
-                <Button
-                  variant="light"
-                  size="sm"
-                  className="px-3 fw-semibold"
-                  onClick={ctx.openCart}
-                >
-                  Cart
-                  {ctx.CartList.length > 0 ? ` - ${ctx.CartList.length}` : ""}
-                </Button>
-              </div>
-            </Nav.Link>
+            {display && (
+              <Nav.Link className="p-0 align-self-center w-100 ms-md-2">
+                <div className="d-grid">
+                  <Button
+                    variant="light"
+                    size="sm"
+                    className="px-3 fw-semibold"
+                    onClick={ctx.openCart}
+                  >
+                    Cart
+                    {ctx.CartList.length > 0 ? ` - ${ctx.CartList.length}` : ""}
+                  </Button>
+                </div>
+              </Nav.Link>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
