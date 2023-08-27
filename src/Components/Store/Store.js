@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Container } from "react-bootstrap";
 import ItemCard from "./ItemCard";
 import Context from "../../Context";
+import Auth from "../Auth/Auth";
 
 function Store() {
   const ctx = useContext(Context);
@@ -21,6 +22,7 @@ function Store() {
           })}
         </div>
       </Container>
+      <Auth />
     </>
   );
 }

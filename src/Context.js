@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 
 const Context = React.createContext({
@@ -10,9 +11,14 @@ const Context = React.createContext({
   addCart: () => {},
   removeCart: () => {},
   changeCart: () => {},
+  isLogIn: false,
+  signUp: () => {},
+  logIn: () => {},
+  logOut: () => {},
 });
 
 export function ContextProvider(props) {
+  // Dummy Data
   const List = [
     {
       item: "Stereo Hearts",
@@ -91,9 +97,32 @@ export function ContextProvider(props) {
     },
   ];
 
+  // React Hooks
   const [CartList, setCartList] = useState([]);
   const [Cart, setCart] = useState(false);
+  const [isLogIn, setLogIn] = useState(false);
 
+  // Logging Functions
+  async function signUp(data) {
+    data.returnSecureToken = true;
+    try {
+      const response = await axios.post(
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDLKmMRL800SGHidB6TAoC9jXvKuu24adw",
+        data
+      );
+      console.log(response);
+    } catch (error) {
+      alert(error);
+    }
+  }
+  async function logIn(data) {
+    console.log(data);
+  }
+  async function logOut(data) {
+    console.log(data);
+  }
+
+  // Cart Function
   function openCart() {
     setCart(true);
   }
@@ -148,6 +177,10 @@ export function ContextProvider(props) {
         addCart: addCart,
         removeCart: removeCart,
         changeCart: changeCart,
+        isLogIn: isLogIn,
+        signUp: signUp,
+        logIn: logIn,
+        logOut: logOut,
       }}
     >
       {props.children}
