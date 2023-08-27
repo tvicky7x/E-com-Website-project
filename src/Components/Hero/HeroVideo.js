@@ -24,6 +24,7 @@ function HeroVideo() {
           <h1 style={{ fontSize: "60px" }} className="fw-bold">
             The Generics
           </h1>
+          <p>Popular EDM Music production studio</p>
           <Button variant="light" className=" fw-semibold mt-2" onClick={store}>
             Visit Our Store
           </Button>

@@ -7,8 +7,8 @@ function Store() {
   const ctx = useContext(Context);
   return (
     <>
-      <Container className="text-center py-4">
-        <h2 className="mb-4">Music Albums</h2>
+      <Container className="text-center py-3">
+        <h2 className="mb-4 mt-2">Music Albums</h2>
         <div className="d-flex flex-wrap gap-3 justify-content-evenly">
           {ctx.List.map((item) => {
             return <ItemCard data={item} key={item.id} />;

@@ -34,7 +34,7 @@ function Contact() {
   return (
     <>
       <Container className="py-3" style={{ maxWidth: "500px" }}>
-        <h2 className="text-center mt-2">Contact Us</h2>
+        <h2 className="text-center mt-2 mb-4">Contact Us</h2>
         <Form onSubmit={submitHandler}>
           <FormGroup className="p-3 bg-body-secondary my-3 rounded">
             <div>
