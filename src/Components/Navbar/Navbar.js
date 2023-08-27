@@ -23,6 +23,9 @@ function NavbarCom() {
             <NavLink to={"/products"} className="nav-link d-inline">
               Store
             </NavLink>
+            <NavLink to={"/contact"} className="nav-link d-inline">
+              Contact
+            </NavLink>
             <NavLink to={"/about"} className="nav-link d-inline">
               About
             </NavLink>

@@ -1,7 +1,18 @@
 import React from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 function About() {
+  const navigate = useNavigate();
+
+  function contactHandler() {
+    navigate("/contact");
+  }
+
+  function homeHandler() {
+    navigate("/");
+  }
+
   return (
     <>
       <Container className="pt-3 pb-5">
@@ -24,10 +35,10 @@ function About() {
                 molestie leo leo, ac euismod sem suscipit non. Nunc et elit nec
                 quam
               </p>
-              <Button variant="outline-dark" size="sm">
-                Follow Us
+              <Button variant="outline-dark" size="sm" onClick={homeHandler}>
+                Home
               </Button>{" "}
-              <Button variant="dark" size="sm">
+              <Button variant="dark" size="sm" onClick={contactHandler}>
                 Contact US
               </Button>
             </div>
