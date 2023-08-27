@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Context = React.createContext({
   Cart: false,
@@ -102,13 +102,26 @@ export function ContextProvider(props) {
   const [isLogIn, setLogIn] = useState(false);
   const [token, setToken] = useState(null);
 
+  // seting Login from localstorage
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setToken(localStorage.getItem("token"));
+      setLogIn(true);
+    }
+  }, []);
+
   // Logging Functions
 
   function logIn(id) {
+    localStorage.setItem("token", id);
+    setTimeout(() => {
+      localStorage.removeItem("token");
+    }, 1000 * 60 * 5);
     setToken(id);
     setLogIn(true);
   }
   function logOut() {
+    localStorage.removeItem("token");
     setToken(null);
     setLogIn(false);
   }

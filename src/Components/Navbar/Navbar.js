@@ -12,9 +12,6 @@ function NavbarCom({ display }) {
   function logInPage() {
     navigate("/logIn");
   }
-  function profilePage() {
-    navigate("/profile");
-  }
   return (
     <Navbar expand="md" className="bg-body-dark" bg="dark" data-bs-theme="dark">
       <Container>
