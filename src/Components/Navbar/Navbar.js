@@ -12,6 +12,9 @@ function NavbarCom({ display }) {
   function logInPage() {
     navigate("/logIn");
   }
+  function profilePage() {
+    navigate("/profile");
+  }
   return (
     <Navbar expand="md" className="bg-body-dark" bg="dark" data-bs-theme="dark">
       <Container>
@@ -38,20 +41,30 @@ function NavbarCom({ display }) {
               About
             </NavLink>
             {ctx.isLogIn && display && (
-              <Nav.Link className="p-0 align-self-center w-100 ms-md-2">
-                <div className="d-grid">
-                  <Button
-                    variant="light"
-                    size="sm"
-                    className="px-3 fw-semibold"
-                    onClick={ctx.openCart}
-                  >
-                    Cart
-                    {ctx.CartList.length > 0 ? ` - ${ctx.CartList.length}` : ""}
+              <>
+                <Nav.Link className="p-0 align-self-center w-100 ms-md-2">
+                  <div className="d-grid">
+                    <Button
+                      variant="light"
+                      size="sm"
+                      className="px-3 fw-semibold"
+                      onClick={ctx.openCart}
+                    >
+                      Cart
+                      {ctx.CartList.length > 0
+                        ? ` - ${ctx.CartList.length}`
+                        : ""}
+                    </Button>
+                  </div>
+                </Nav.Link>
+                <Nav.Link>
+                  <Button variant="light" size="sm" onClick={profilePage}>
+                    <i className="bi bi-person-circle"></i>
                   </Button>
-                </div>
-              </Nav.Link>
+                </Nav.Link>
+              </>
             )}
+
             {!ctx.isLogIn && display && (
               <Nav.Link className="p-0 align-self-center w-100 ms-md-2">
                 <div className="d-grid">

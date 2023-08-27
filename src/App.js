@@ -8,6 +8,7 @@ import Error from "./Pages/Error";
 import Contact from "./Pages/Contact";
 import Product from "./Pages/Product";
 import Auth from "./Components/Auth/Auth";
+import Profile from "./Pages/Profile";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
       { path: "/products/:productId", element: <Product /> },
       { path: "/contact", element: <Contact /> },
       { path: "/about", element: <About /> },
+      { path: "/profile", element: <Profile /> },
       { path: "/logIn", element: <Auth /> },
     ],
   },
