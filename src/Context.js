@@ -16,54 +16,78 @@ export function ContextProvider(props) {
   const List = [
     {
       item: "Stereo Hearts",
-      id: "Stereo Hearts",
+      id: "Stereo-Hearts",
       url: "https://c.saavncdn.com/947/Stereo-Hearts-feat-Adam-Levine--English-2011-20190607045815-500x500.jpg",
       price: "150",
+      star: 5,
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc blandit, risus vel pulvinar volutpat, dolor neque accumsan dui, id ullamcorper tellus erat non leo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec at dolor ac mauris sagittis faucibus eget ac odio. Etiam justo dolor, tincidunt eget mauris vel, malesuada suscipit tortor. Proin semper metus in justo dignissim placerat. Fusce rhoncus, massa in molestie suscipit, nulla orci varius orci, quis finibus ante turpis vitae odio. Suspendisse pellentesque risus eu est vulputate consectetur.",
     },
     {
       item: "The Nights",
-      id: "The Nights",
+      id: "The-Nights",
       url: "https://c.saavncdn.com/184/The-Nights-Avicii-By-Avicii-English-2015-500x500.jpg",
       price: "178",
+      star: 4,
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc blandit, risus vel pulvinar volutpat, dolor neque accumsan dui, id ullamcorper tellus erat non leo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec at dolor ac mauris sagittis faucibus eget ac odio. Etiam justo dolor, tincidunt eget mauris vel, malesuada suscipit tortor. Proin semper metus in justo dignissim placerat. Fusce rhoncus, massa in molestie suscipit, nulla orci varius orci, quis finibus ante turpis vitae odio. Suspendisse pellentesque risus eu est vulputate consectetur.",
     },
     {
       item: "Rise",
       id: "Rise",
       url: "https://c.saavncdn.com/750/Rise-English-2018-20180523230337-500x500.jpg",
       price: "128",
+      star: 3,
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc blandit, risus vel pulvinar volutpat, dolor neque accumsan dui, id ullamcorper tellus erat non leo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec at dolor ac mauris sagittis faucibus eget ac odio. Etiam justo dolor, tincidunt eget mauris vel, malesuada suscipit tortor. Proin semper metus in justo dignissim placerat. Fusce rhoncus, massa in molestie suscipit, nulla orci varius orci, quis finibus ante turpis vitae odio. Suspendisse pellentesque risus eu est vulputate consectetur.",
     },
     {
       item: "Me, Myself & I",
-      id: "Me, Myself & I",
+      id: "Me,-Myself-&-I",
       url: "https://c.saavncdn.com/473/When-It-s-Dark-Out-English-2015-500x500.jpg",
       price: "195",
+      star: 5,
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc blandit, risus vel pulvinar volutpat, dolor neque accumsan dui, id ullamcorper tellus erat non leo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec at dolor ac mauris sagittis faucibus eget ac odio. Etiam justo dolor, tincidunt eget mauris vel, malesuada suscipit tortor. Proin semper metus in justo dignissim placerat. Fusce rhoncus, massa in molestie suscipit, nulla orci varius orci, quis finibus ante turpis vitae odio. Suspendisse pellentesque risus eu est vulputate consectetur.",
     },
   ];
 
   const Merchandise = [
     {
       item: "Love it Cup",
-      id: "Love it Cup",
+      id: "Love-it-Cup",
       url: "https://c1.wallpaperflare.com/preview/906/25/252/coffee-drink-cafe-cup.jpg",
       price: "75",
+      star: 3,
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc blandit, risus vel pulvinar volutpat, dolor neque accumsan dui, id ullamcorper tellus erat non leo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec at dolor ac mauris sagittis faucibus eget ac odio. Etiam justo dolor, tincidunt eget mauris vel, malesuada suscipit tortor. Proin semper metus in justo dignissim placerat. Fusce rhoncus, massa in molestie suscipit, nulla orci varius orci, quis finibus ante turpis vitae odio. Suspendisse pellentesque risus eu est vulputate consectetur.",
     },
     {
       item: "Legendary T-shirt",
-      id: "Legendary T-shirt",
+      id: "Legendary-T-shirt",
       url: "https://c1.wallpaperflare.com/preview/428/266/566/title-photo-logo-shirt.jpg",
       price: "250",
+      star: 3,
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc blandit, risus vel pulvinar volutpat, dolor neque accumsan dui, id ullamcorper tellus erat non leo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec at dolor ac mauris sagittis faucibus eget ac odio. Etiam justo dolor, tincidunt eget mauris vel, malesuada suscipit tortor. Proin semper metus in justo dignissim placerat. Fusce rhoncus, massa in molestie suscipit, nulla orci varius orci, quis finibus ante turpis vitae odio. Suspendisse pellentesque risus eu est vulputate consectetur.",
     },
     {
       item: "Cool Grocery Bag",
-      id: "Cool Grocery Bag",
+      id: "Cool-Grocery-Bag",
       url: "https://img.freepik.com/premium-photo/mockup-reusable-grocery-bags-with-print-form-large-black-peas-green-leaf-white-isol_248570-2576.jpg?w=360",
       price: "100",
+      star: 5,
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc blandit, risus vel pulvinar volutpat, dolor neque accumsan dui, id ullamcorper tellus erat non leo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec at dolor ac mauris sagittis faucibus eget ac odio. Etiam justo dolor, tincidunt eget mauris vel, malesuada suscipit tortor. Proin semper metus in justo dignissim placerat. Fusce rhoncus, massa in molestie suscipit, nulla orci varius orci, quis finibus ante turpis vitae odio. Suspendisse pellentesque risus eu est vulputate consectetur.",
     },
     {
       item: "Premium Bottles",
-      id: "Premium Bottles",
+      id: "Premium-Bottles",
       url: "https://mockuptree.com/wp-content/uploads/edd/2021/01/Free_Bottle_Mockups-e1610718967677.jpg",
       price: "395",
+      star: 4,
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc blandit, risus vel pulvinar volutpat, dolor neque accumsan dui, id ullamcorper tellus erat non leo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec at dolor ac mauris sagittis faucibus eget ac odio. Etiam justo dolor, tincidunt eget mauris vel, malesuada suscipit tortor. Proin semper metus in justo dignissim placerat. Fusce rhoncus, massa in molestie suscipit, nulla orci varius orci, quis finibus ante turpis vitae odio. Suspendisse pellentesque risus eu est vulputate consectetur.",
     },
   ];
 

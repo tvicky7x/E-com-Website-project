@@ -5,6 +5,11 @@ import HeroVideo from "./HeroVideo";
 
 function Hero(props) {
   const location = useLocation();
+
+  if (location.pathname.includes("/product/")) {
+    return null;
+  }
+
   if (location.pathname === "/") {
     return <HeroVideo />;
   }

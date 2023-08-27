@@ -30,7 +30,7 @@ function Cart() {
           <h5 className="text-center">Cart</h5>
           <ListGroup>
             {ctx.CartList.map((item) => {
-              return <CartItem data={item} />;
+              return <CartItem data={item} key={item.id} />;
             })}
           </ListGroup>
           <div className="d-flex justify-content-between align-items-center mt-3">

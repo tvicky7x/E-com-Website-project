@@ -25,7 +25,7 @@ function CartItem(props) {
             <span className="fw-semibold">
               <Button variant="none" size="sm" className="p-0">
                 <i
-                  class="bi bi-plus-lg"
+                  className="bi bi-plus-lg"
                   onClick={() => {
                     ctx.changeCart(props.data.id, 1);
                   }}
@@ -34,7 +34,7 @@ function CartItem(props) {
               {props.data.quantity}{" "}
               <Button variant="none" size="sm" className="p-0">
                 <i
-                  class="bi bi-dash-lg"
+                  className="bi bi-dash-lg"
                   onClick={() => {
                     ctx.changeCart(props.data.id, -1);
                   }}
