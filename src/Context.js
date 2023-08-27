@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useState } from "react";
 
 const Context = React.createContext({
@@ -113,8 +112,9 @@ export function ContextProvider(props) {
     setToken(id);
     setLogIn(true);
   }
-  function logOut(data) {
-    console.log(data);
+  function logOut() {
+    setToken(null);
+    setLogIn(false);
   }
 
   // Cart Function

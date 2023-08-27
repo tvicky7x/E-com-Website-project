@@ -9,10 +9,12 @@ import {
   FormLabel,
 } from "react-bootstrap";
 import Context from "../Context";
+import { useNavigate } from "react-router-dom";
 
 function Profile() {
   const changePasswordRef = useRef();
   const ctx = useContext(Context);
+  const navigate = useNavigate();
 
   async function changePassword(e) {
     e.preventDefault();
@@ -31,6 +33,11 @@ function Profile() {
       alert(error);
     }
   }
+
+  async function logout() {
+    ctx.logOut();
+    navigate("/logIn");
+  }
   return (
     <>
       <Container className="text-center py-3">
@@ -45,11 +52,17 @@ function Profile() {
               <FormLabel>Change Password</FormLabel>
               <FormControl type="password" ref={changePasswordRef} />
             </div>
-            <Button variant="dark mt-3" type="submit">
+            <Button variant="dark mt-2" type="submit" size="sm">
               Change Password
             </Button>
           </FormGroup>
         </Form>
+        <div className=" bg-dark-subtle p-3 rounded mt-3">
+          <p className="mb-2">Log Out of Account</p>
+          <Button variant="dark" onClick={logout}>
+            Log Out
+          </Button>
+        </div>
       </Container>
     </>
   );
