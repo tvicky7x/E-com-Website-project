@@ -48,7 +48,7 @@ function Auth() {
         );
         navigate("/");
         e.target.reset();
-        ctx.logIn(response.data.idToken);
+        ctx.logIn(response.data.idToken, email);
       } catch (error) {
         alert("Authentication Failed");
       }

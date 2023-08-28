@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 const Context = React.createContext({
@@ -17,6 +18,11 @@ const Context = React.createContext({
 });
 
 export function ContextProvider(props) {
+  // crudCrud.com
+  const axiosBase = axios.create({
+    baseURL: "https://crudcrud.com/api/33f3d58f54434bc8a11214515a9414c4",
+  });
+
   // Dummy Data
   const List = [
     {
@@ -101,27 +107,43 @@ export function ContextProvider(props) {
   const [Cart, setCart] = useState(false);
   const [isLogIn, setLogIn] = useState(false);
   const [token, setToken] = useState(null);
+  const [userEmail, setEmail] = useState(null);
 
   // seting Login from localstorage
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (localStorage.getItem("token") || localStorage.getItem("userEmail")) {
       setToken(localStorage.getItem("token"));
+      setEmail(localStorage.getItem("userEmail"));
+      if (localStorage.getItem("cartId")) {
+        // (async () => {
+        //   const response = await axiosBase.get(
+        //     `/cart${localStorage.getItem("userEmail")}/${localStorage.getItem(
+        //       "cartId"
+        //     )}`
+        //   );
+        //   setCartList(response.data.cartData);
+        // })();
+      }
       setLogIn(true);
     }
-  }, []);
+  }, [axiosBase]);
 
   // Logging Functions
-
-  function logIn(id) {
+  function logIn(id, email) {
     localStorage.setItem("token", id);
+    localStorage.setItem("userEmail", email.replace(/[^A-Za-z0-9]/gi, ""));
     setTimeout(() => {
       localStorage.removeItem("token");
+      localStorage.removeItem("userEmail");
+      localStorage.removeItem("cartId");
     }, 1000 * 60 * 5);
     setToken(id);
     setLogIn(true);
   }
   function logOut() {
     localStorage.removeItem("token");
+    localStorage.removeItem("userEmail");
+    localStorage.removeItem("cartId");
     setToken(null);
     setLogIn(false);
   }
@@ -143,6 +165,7 @@ export function ContextProvider(props) {
     ) {
       setCartList((oldCart) => {
         data.quantity = 1;
+        addCartToBackend([...oldCart, data]);
         return [...oldCart, data];
       });
     }
@@ -150,9 +173,11 @@ export function ContextProvider(props) {
 
   function removeCart(id) {
     setCartList((oldCart) => {
-      return oldCart.filter((item) => {
+      const cartData = oldCart.filter((item) => {
         return item.id !== id;
       });
+      addCartToBackend(cartData);
+      return cartData;
     });
   }
 
@@ -166,7 +191,16 @@ export function ContextProvider(props) {
       }
       return item;
     });
+    addCartToBackend(newCartData);
     setCartList(newCartData);
+  }
+
+  // async function
+  async function addCartToBackend(cartData) {
+    const response = await axiosBase.post(`/cart${userEmail}`, { cartData });
+    if (!localStorage.getItem("cartId")) {
+      localStorage.setItem("cartId", response.data._id);
+    }
   }
 
   return (
