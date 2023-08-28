@@ -35,6 +35,10 @@ const routerLogOut = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: "/about", element: <About /> },
       { path: "/logIn", element: <Auth /> },
+      { path: "/products", element: <Auth /> },
+      { path: "/products/:productId", element: <Auth /> },
+      { path: "/contact", element: <Auth /> },
+      { path: "/profile", element: <Auth /> },
     ],
   },
 ]);
