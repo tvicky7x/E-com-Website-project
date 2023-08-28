@@ -19,7 +19,7 @@ function ProductDetails({ data }) {
               src={data.url}
               alt=""
               className="object-fit-cover rounded sticky-top"
-              style={{ maxWidth: "400px", maxHeight: "400px" }}
+              style={{ maxWidth: "300px", maxHeight: "300px" }}
             />
           </Col>
           <Col md={true}>

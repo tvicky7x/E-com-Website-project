@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 const Context = React.createContext({
   Cart: false,
@@ -15,13 +15,12 @@ const Context = React.createContext({
   logIn: () => {},
   logOut: () => {},
   token: null,
+  userEmail: "",
 });
 
 export function ContextProvider(props) {
-  // crudCrud.com
-  const axiosBase = axios.create({
-    baseURL: "https://crudcrud.com/api/33f3d58f54434bc8a11214515a9414c4",
-  });
+  //  crud variable
+  const crudUrl = "https://crudcrud.com/api/04e193705d56486eb0a09b3f6e87b8ea";
 
   // Dummy Data
   const List = [
@@ -107,45 +106,108 @@ export function ContextProvider(props) {
   const [Cart, setCart] = useState(false);
   const [isLogIn, setLogIn] = useState(false);
   const [token, setToken] = useState(null);
-  const [userEmail, setEmail] = useState(null);
+  const [userEmail, setEmail] = useState("");
+
+  // asyn function to getinformation
+  const getCartFromBackend = useCallback(async (email, id) => {
+    const response = await axios.get(`${crudUrl}/cart${email}/${id}`);
+    setCartList(response.data.cartData);
+  }, []);
+
+  // async function ADD --------------------------------------------------///////////////////////////////////////////
+  async function addCartToBackend(cartData) {
+    let storeData = JSON.parse(localStorage.getItem("token"));
+    (async () => {
+      const oldUser = await firstCheck(storeData.email);
+      if (oldUser.length === 0) {
+        const response = await axios.post(`${crudUrl}/cart${storeData.email}`, {
+          cartData: cartData,
+        });
+        if (!storeData.id) {
+          storeData.id = response.data._id;
+          localStorage.setItem("token", JSON.stringify(storeData));
+        }
+      } else {
+        await axios.put(`${crudUrl}/cart${storeData.email}/${storeData.id}`, {
+          cartData: cartData,
+        });
+      }
+    })();
+  }
+  ////////////////////-------------------------------------------------////////////////////////////////////////////
+
+  // VERY FIRST Check For Old Data ---------------------->>>>>>>>>>>>>>>>>>>>>>>
+  async function firstCheck(email) {
+    try {
+      const newResponse = await axios.get(`${crudUrl}/cart${email}`);
+      if (newResponse.data.length !== 0) {
+        const storeData = JSON.parse(localStorage.getItem("token"));
+        if (!storeData.id) {
+          console.log("doing");
+          storeData.id = newResponse.data[0]._id;
+          localStorage.setItem("token", JSON.stringify(storeData));
+        }
+        return {
+          length: newResponse.data[0].cartData.length,
+          cartId: newResponse.data[0]._id,
+        };
+      } else {
+        return { length: 0 };
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  // ----------------------------------------------------->>>>>>>>>>>>>>>>>>>>>>
 
   // seting Login from localstorage
   useEffect(() => {
-    if (localStorage.getItem("token") || localStorage.getItem("userEmail")) {
-      setToken(localStorage.getItem("token"));
-      setEmail(localStorage.getItem("userEmail"));
-      if (localStorage.getItem("cartId")) {
-        // (async () => {
-        //   const response = await axiosBase.get(
-        //     `/cart${localStorage.getItem("userEmail")}/${localStorage.getItem(
-        //       "cartId"
-        //     )}`
-        //   );
-        //   setCartList(response.data.cartData);
-        // })();
-      }
+    if (localStorage.getItem("token")) {
+      const storeData = JSON.parse(localStorage.getItem("token"));
+      setToken(storeData.token);
+      setEmail(storeData.longemail);
+      (async () => {
+        const oldUser = await firstCheck(storeData.email);
+        if (oldUser.length > 0) {
+          getCartFromBackend(storeData.email, oldUser.cartId);
+        }
+      })();
       setLogIn(true);
     }
-  }, [axiosBase]);
+  }, [getCartFromBackend]);
 
   // Logging Functions
   function logIn(id, email) {
-    localStorage.setItem("token", id);
-    localStorage.setItem("userEmail", email.replace(/[^A-Za-z0-9]/gi, ""));
+    localStorage.setItem(
+      "token",
+      JSON.stringify({
+        token: id,
+        email: email.replace(/[^A-Za-z0-9]/gi, ""),
+        longemail: email,
+      })
+    );
     setTimeout(() => {
       localStorage.removeItem("token");
-      localStorage.removeItem("userEmail");
-      localStorage.removeItem("cartId");
     }, 1000 * 60 * 5);
+    const storeData = JSON.parse(localStorage.getItem("token"));
+    (async () => {
+      const oldUser = await firstCheck(storeData.email);
+      if (oldUser.length > 0) {
+        getCartFromBackend(storeData.email, oldUser.cartId);
+      }
+    })();
+    setEmail(storeData.longemail);
     setToken(id);
     setLogIn(true);
   }
+
+  // Log OUT fUCTION
   function logOut() {
     localStorage.removeItem("token");
-    localStorage.removeItem("userEmail");
-    localStorage.removeItem("cartId");
+    setEmail("");
     setToken(null);
     setLogIn(false);
+    setCartList([]);
   }
 
   // Cart Function
@@ -163,20 +225,24 @@ export function ContextProvider(props) {
         return item.id !== data.id;
       })
     ) {
+      data.quantity = 1;
+      addCartToBackend([...CartList, data]);
       setCartList((oldCart) => {
-        data.quantity = 1;
-        addCartToBackend([...oldCart, data]);
         return [...oldCart, data];
       });
     }
   }
 
   function removeCart(id) {
+    addCartToBackend(
+      CartList.filter((item) => {
+        return item.id !== id;
+      })
+    );
     setCartList((oldCart) => {
       const cartData = oldCart.filter((item) => {
         return item.id !== id;
       });
-      addCartToBackend(cartData);
       return cartData;
     });
   }
@@ -195,14 +261,6 @@ export function ContextProvider(props) {
     setCartList(newCartData);
   }
 
-  // async function
-  async function addCartToBackend(cartData) {
-    const response = await axiosBase.post(`/cart${userEmail}`, { cartData });
-    if (!localStorage.getItem("cartId")) {
-      localStorage.setItem("cartId", response.data._id);
-    }
-  }
-
   return (
     <Context.Provider
       value={{
@@ -216,7 +274,7 @@ export function ContextProvider(props) {
         removeCart: removeCart,
         changeCart: changeCart,
         isLogIn: isLogIn,
-
+        userEmail: userEmail,
         logIn: logIn,
         logOut: logOut,
         token: token,

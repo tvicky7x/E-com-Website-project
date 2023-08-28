@@ -43,6 +43,7 @@ function Profile() {
     <>
       <Container className="text-center py-3">
         <h2 className="mb-4 mt-2">Profile</h2>
+        <h4>Email: {ctx.userEmail}</h4>
         <Form
           className="mx-auto"
           style={{ maxWidth: "400px" }}
